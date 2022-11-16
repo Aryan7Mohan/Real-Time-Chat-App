@@ -4,13 +4,11 @@ import TextField from "@mui/material/TextField";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import PhoneIcon from "@mui/icons-material/Phone";
 import React, { useEffect, useRef, useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
 import io from "socket.io-client";
 import styled from "styled-components";
 import { host } from "../utils/APIRoutes";
 import "../importfont.css";
-import { useNavigate, useParams } from "react-router-dom";
 // import "./App.css";
 
 // const socket = io.connect("http://localhost:5000");
@@ -34,7 +32,6 @@ const VideoChat = ({
   const [callAccepted, setCallAccepted] = useState(false);
   // const [idToCall, setIdToCall] = useState(null);
   const [callEnded, setCallEnded] = useState(false);
-  const [videoPage, setVideoPage] = useState(true);
   // const [callDeclined, setCallDeclined] = useState(false);
   const socket = useRef();
   const myVideo = useRef({ srcObject: null });
@@ -250,7 +247,7 @@ const VideoChat = ({
                 playsInline
                 ref={userVideo}
                 autoPlay
-                style={{ width: "500px" }}
+                style={{ width: "600px" }}
               />
               {/* </div> */}
               <h3>{friend.username}</h3>
@@ -401,6 +398,8 @@ const Container = styled.div`
     justify-content: flex-start;
     .video-container {
       display: flex;
+      min-width: 500px;
+      min-height: 300px;
       align-items: center;
       justify-content: center;
       gap: 2rem;
