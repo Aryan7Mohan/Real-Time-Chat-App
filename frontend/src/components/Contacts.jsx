@@ -31,8 +31,8 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
     <>
       {currentUsername && (
         <Container>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
+          <div className="brand-contacts">
+            <img src={Logo} alt="logo" height={32} width={32} />
             <h3>
               Chat<span>Vibe</span>
             </h3>
@@ -140,7 +140,7 @@ const Container = styled.div`
     color: #cf9fff;
   }
 
-  .brand {
+  .brand-contacts {
     display: flex;
     align-items: center;
     justify-content: center;

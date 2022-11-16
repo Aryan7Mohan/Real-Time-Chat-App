@@ -9,6 +9,7 @@ import Peer from "simple-peer";
 import io from "socket.io-client";
 import styled from "styled-components";
 import { host } from "../utils/APIRoutes";
+import "../importfont.css";
 import { useNavigate, useParams } from "react-router-dom";
 // import "./App.css";
 
@@ -173,7 +174,7 @@ const VideoChat = ({
       console.log("callEnded");
       setCallEnded(true);
       setReceivingCall(false);
-      
+
       // myVideo.current.srcObject.getVideoTracks().forEach((track) => track.stop());
       // userVideo.current.srcObject.getVideoTracks().forEach((track) => track.stop());
       // connectionRef.current.srcObject
@@ -223,34 +224,35 @@ const VideoChat = ({
   return (
     <Container>
       <div className="container1">
+        <div className="video-chat-navbar">
+          <button className="btn" onClick={leaveCall}>Return To Chat</button>
+        </div>
         {/* <div className="return-div">
         <button>Return</button>
       </div> */}
         <div className="video-container">
-          <div className="video">
-            <div className="video-box">
-              {stream && (
-                <video
-                  playsInline
-                  muted
-                  ref={myVideo}
-                  autoPlay
-                  style={{ width: "300px" }}
-                />
-              )}
-            </div>
+          {/* <div className="video">
+            {stream && (
+              <video
+                playsInline
+                muted
+                ref={myVideo}
+                autoPlay
+                style={{ width: "300px" }}
+              />
+            )}
             <h3>{currentUser.username}</h3>
-          </div>
+          </div> */}
           {callAccepted && !callEnded ? (
             <div className="video">
-              <div className="video-box">
-                <video
-                  playsInline
-                  ref={userVideo}
-                  autoPlay
-                  style={{ width: "300px" }}
-                />
-              </div>
+              {/* <div className="video-box"> */}
+              <video
+                playsInline
+                ref={userVideo}
+                autoPlay
+                style={{ width: "500px" }}
+              />
+              {/* </div> */}
               <h3>{friend.username}</h3>
             </div>
           ) : null}
@@ -262,28 +264,32 @@ const VideoChat = ({
         </div> */}
         <div className="call-button">
           {callAccepted && !callEnded ? (
-            <Button variant="contained" color="secondary" onClick={leaveCall}>
+            <Button
+              variant="contained"
+              color="secondary"
+              className="btn end-call-button"
+              onClick={leaveCall}
+            >
               End Call
             </Button>
           ) : (
-            <>
-              <IconButton
-                color="primary"
-                aria-label="call"
-                onClick={handleCallButtonClick}
-              >
+            <Button
+              onClick={handleCallButtonClick}
+              className="btn start-call-button"
+            >
+              <IconButton color="primary" aria-label="call">
                 <PhoneIcon fontSize="large" />
               </IconButton>
               {friend.username}
-            </>
+            </Button>
           )}
         </div>
         <div>
           {receivingCall && !callAccepted ? (
             <div className="caller">
-              <h1>{friend.username} is calling...</h1>
-              <Button variant="contained" color="primary" onClick={answerCall}>
-                Answer
+              <h2>Incoming call from {friend.username}...</h2>
+              <Button className="btn" variant="contained" color="primary" onClick={answerCall}>
+                Accept Call
               </Button>
               {/* <Button variant="contained" color="danger" onClick={rejectCall}>
                 Decline
@@ -319,6 +325,66 @@ const Container = styled.div`
       background-position: 0% 50%;
     }
   }
+
+  .caller {
+    margin-top: 30px;
+    display: flex;
+    gap: 1rem;
+    button {
+      background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+      padding: 0.5rem;
+      color: black;
+    }
+  }
+  .video-chat-navbar {
+    margin-right: auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    button {
+      font-family: "Raleway", sans-serif;
+      color: black;
+      border: none;
+      padding: 15px;
+      border-radius: 0.8rem;
+      font-size: 1rem;
+      cursor:pointer;
+      /* background-color: #cf9fff; */
+      background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+    }
+  }
+  .start-call-button {
+    border-radius: 1rem;
+    padding: 8px;
+    padding-right: 10px;
+    color: black;
+    border: 1px solid #50c878;
+    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+  }
+  .start-call-button:hover {
+    background-color: #50c878;
+  }
+
+  .end-call-button {
+    border-radius: 1rem;
+    padding: 0.5rem;
+    color: black;
+    /* border: 1px solid crimson; */
+    background-color: crimson;
+  }
+
+  .btn {
+    /* padding: 15px; */
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    /* color: white; */
+    /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 10px #eee;
+    border-radius: 16px;
+  }
+  .btn:hover {
+    background-position: right center; /* change the direction of the change here */
+  }
   .container1 {
     .return-div {
       align-items: start;
@@ -332,36 +398,39 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     .video-container {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 2rem;
       margin-bottom: 30px;
+      padding: 40px;
+      border: 1px solid #50c878;
       .video {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
-        .video-box {
+        /* .video-box {
           display:flex;
           border: 2px solid limegreen;
+          padding: 40px 0px;
           width: 300px;
           height: 300px;
           align-items: center;
           justify-content:center;
-        }
+        } */
       }
     }
     .make-call {
       margin-bottom: 20px;
-      button {
+      /* button {
         padding: 8px;
         border-radius: 0.5rem;
         border: none;
         background-color: #cf9fff;
-      }
+      } */
     }
     /* display: grid;
     grid-template-columns: 25% 75%; */

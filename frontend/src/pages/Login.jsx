@@ -75,7 +75,7 @@ const Login = () => {
         />
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <img src={Logo} alt="Logo" />
+            <img src={Logo} alt="Logo" height={80} width={80} />
             <h1>
               Chat<span>Vibe</span>
             </h1>

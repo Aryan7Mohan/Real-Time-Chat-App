@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Cat from "../assets/cute-cat.gif";
 import Logout from "./Logout";
 import { useNavigate } from "react-router-dom";
+import "../importfont.css";
 
 const Welcome = ({ currentUser }) => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const Welcome = ({ currentUser }) => {
 };
 
 const Container = styled.div`
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 .nav {
   display: flex;

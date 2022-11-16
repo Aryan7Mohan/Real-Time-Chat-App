@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 import { v4 as uuidv4 } from "uuid";
+import "../importfont.css";
 
 const ChatContainer = ({ currentChat, currentUser, socket, setChatMode }) => {
   const navigate = useNavigate();
@@ -148,7 +149,7 @@ const ChatContainer = ({ currentChat, currentUser, socket, setChatMode }) => {
 };
 
 const Container = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
   font-family: "Poppins", sans-serif;
   display: grid;
 
@@ -196,6 +197,7 @@ const Container = styled.div`
       }
     }
     .message {
+      font-family: 'Raleway', sans-serif;
       display: flex;
       align-items: center;
       .content {

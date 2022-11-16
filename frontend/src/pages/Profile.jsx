@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FriendsCard from "../components/FriendsCard";
 import { getUserDetailsRoute, getFriendsRoute } from "../utils/APIRoutes";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const [currentUser, setCurrentUser] = useState({});
   const [contacts, setContacts] = useState([]);
@@ -35,6 +37,10 @@ const Profile = () => {
   useEffect(() => {
     fetchCurrentUser();
   }, []);
+
+  const handleGoBack = () => {
+    navigate('/');
+  }
   return (
     <Container>
       <div className="container">
@@ -74,7 +80,7 @@ const Profile = () => {
         <div className="friends-container">
         <div className="friends-heading">
         <h1>Friends' List</h1>
-        <button>Go Back</button>
+        <button onClick={handleGoBack}>Go Back</button>
         </div>
           <div className="friends-list">
             {contacts.map((contact, index) => {
@@ -139,6 +145,15 @@ const Container = styled.div`
     }
     padding: 1rem;
       border-bottom: 1px solid #cf9fff;
+      button {
+      border: none;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      background-color: #9a86f3;
+      color: white;
+      font-size: 1.2rem;
+      margin-right: 20px;
+    }
   }
   .user-profile {
     display: grid;
